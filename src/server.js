@@ -6,16 +6,29 @@ var players = {};
 app.listen(3000);
 
 function handler (req, res) {
-  fs.readFile(__dirname + '/index.html',
-  function (err, data) {
-    if (err) {
-      res.writeHead(500);
-      return res.end('Error loading index.html');
-    }
+	console.log('url requested: '+req.url);
+	var url;
+	var content;
 
-    res.writeHead(200);
-    res.end(data);
-  });
+	if (req.url == '/') {
+		url = '/client/index.html';
+	}
+	else {
+		url = '/client'+req.url;
+	}
+
+	fs.readFile(__dirname + url, function (err, data) {
+	    if (err) {
+			res.writeHead(500);
+			return res.end('Error loading index.html');
+	    }
+
+	    if (req.url != '/') {
+	    	res.setHeader('Content-Type', 'text/javascript');
+	    }
+	    res.writeHead(200);
+	    res.end(data);
+	});
 }
 
 io.sockets.on('connection', function (socket) {
