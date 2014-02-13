@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta content="text/html; charset=utf-8">
+		<title>Rou</title>
+	</head>
+	<body>
+		<div style="margin: 20px auto; max-width: 960px;">
+			<input id="nome" type="text" placeholder="Seu nome">
+			<button id="comeca">Começa</button>
+			
+			<canvas width="960" height="540" id="screen">
+			</canvas>
+		</div>
+	</body>
+	
+	<script src="socket.io.js"></script>
+	<script>
+		document.getElementById('comeca').onclick = function() {
+			document.getElementById('comeca').remove();
+
+			start();
+		};
+	</script>
+	
+	<script src="rou.js"></script>
+</html>
